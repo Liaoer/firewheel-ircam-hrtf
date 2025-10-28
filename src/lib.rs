@@ -11,7 +11,7 @@
 //! This simulation is moderately expensive. You'll generally want to avoid more
 //! than 32-64 HRTF emitters, especially on less powerful devices.
 
-#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 #![warn(missing_debug_implementations)]
 #![warn(missing_docs)]
 
@@ -384,11 +384,15 @@ impl AudioNodeProcessor for FyroxHrtfProcessor {
             self.attenuation_processor.reset();
             ProcessStatus::ClearAllOutputs
         } else {
-            ProcessStatus::outputs_not_silent()
+            ProcessStatus::OutputsModified
         }
     }
 
-    fn new_stream(&mut self, stream_info: &firewheel::StreamInfo) {
+    fn new_stream(
+        &mut self,
+        stream_info: &firewheel::StreamInfo,
+        _store: &mut firewheel::node::ProcStreamCtx,
+    ) {
         if stream_info.prev_sample_rate != stream_info.sample_rate {
             let sample_rate = stream_info.sample_rate.get();
 
