@@ -34,7 +34,7 @@ include = [
 all-features = true
 
 [dependencies]
-firewheel = { version = "0.9.0", default-features = false, features = [
+firewheel = { path = "../Firewheel", default-features = false, features = [
   "glam-30",
   "std",
 ] }
@@ -42,10 +42,10 @@ glam = { version = "0.30", default-features = false, features = ["std"] }
 hrtf = "0.8.1"
 
 # Bevy dependencies
-bevy_ecs = { version = "0.17.2", default-features = false, features = [
+bevy_ecs = { path="../../bevy_engine/crates/bevy_ecs", default-features = false, features = [
   "std",
 ], optional = true }
-bevy_reflect = { version = "0.17.2", default-features = false, features = [
+bevy_reflect = {  path="../../bevy_engine/crates/bevy_reflect", default-features = false, features = [
   "glam",
   "std",
 ], optional = true }
